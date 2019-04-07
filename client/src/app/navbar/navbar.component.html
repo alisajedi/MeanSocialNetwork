@@ -1,0 +1,42 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark info-color-dark" [containerInside]="false">
+
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a routerLink="/dashboard" class="navbar-brand" href="#">Trustply</a></mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+  <links>
+    <ul class="navbar-nav nav-flex-icons">
+      <li class="nav-item avatar dropdown" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          <mdb-icon fas icon="user"></mdb-icon>
+        </a>
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-left dropdown dropdown-primary" role="menu">
+          <a routerLink="/profile" class="dropdown-item waves-light" mdbWavesEffect href="#">Profile</a>
+          <a (click)="logout()" class="dropdown-item waves-light" mdbWavesEffect href="">Log out</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"> <mdb-icon fas icon="globe"></mdb-icon> 1 </a>
+      </li>
+    </ul>
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a routerLink="/dashboard" class="nav-link waves-light" mdbWavesEffect>Dashboard<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/profile" class="nav-link waves-light" mdbWavesEffect>account</a>
+      </li>
+    </ul>
+        <!-- Search form -->
+        <form class="form-inline waves-light" mdbWavesEffect>
+          <div class="md-form my-0 ml-auto">
+              <input class="form-control mr-sm-2" type="text" placeholder="Search">
+          </div>
+      </form>
+  </links>
+    <!-- Links -->
+
+</mdb-navbar>
+<!--/.Navbar-->

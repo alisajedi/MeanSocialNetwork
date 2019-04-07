@@ -49,4 +49,27 @@ exports.userContent = (req, res) => {
       });
     })
   }
- 
+
+exports.updateProfile = (req, res) => {
+  User.update(
+    { name: req.body.name},
+    { where: { id : req.userId }}
+  ).then(updatedUser => {
+    User.findOne({
+      where: {id: req.userId},
+      attributes: ['name', 'username', 'email']
+    }).then(user => {
+      res.status(200).json({
+        "description": "User profile updated",
+        "user": user
+      });
+    }).catch(err => {
+      res.status(500).json({
+        "description": "Can not find updated user",
+        "error": err
+      });
+    })
+}).catch(function(e) {
+    console.log("profile update failed !");
+})
+}

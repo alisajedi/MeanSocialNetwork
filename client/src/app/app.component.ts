@@ -9,13 +9,14 @@ import { LoginService } from './login.service';
 })
 export class AppComponent {
   title = 'client';
-  constructor(private login: LoginService, private router: Router) { 
-    if (this.login.loggedIn) {
+  public loggedIn:Boolean = false;
+
+  constructor(private auth: LoginService, private router: Router) { 
+    this.loggedIn= this.auth.loggedIn;
+    if (this.loggedIn) {
       router.navigate(['dashboard']);
     }
   }
-  logout() {
-    this.login.logout();
-    this.router.navigate(['login']);
+  ngOnInit() {
   }
 }

@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { HttpClientModule } from  '@angular/common/http';
+import { HttpClientModule, HttpClient } from  '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
+import { RouterModule, Routes} from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +13,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LoginService } from './login.service';
 import { LoginGuard } from './login.guard';
+import { NavbarComponent } from './navbar/navbar.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -21,13 +23,15 @@ export function tokenGetter() {
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    ProfileComponent
+    ProfileComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    RouterModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

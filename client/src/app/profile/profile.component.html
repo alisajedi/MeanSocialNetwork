@@ -1,3 +1,81 @@
-<p>
-  profile works!
-</p>
+<div class="row">
+  <div class="col-md-2">
+    <!--Card-->
+    <mdb-card cascade="true" narrower="true">
+
+      <!--Card image-->
+      <div class="view view-cascade overlay waves-light" mdbWavesEffect>
+        <mdb-card-img src="../../../assets/img/user.png"></mdb-card-img>
+        <a>
+          <div class="mask rgba-white-slight"></div>
+        </a>
+      </div>
+      <!--/Card image-->
+
+      <mdb-card-body cascade="true" class="text-center">
+        <!--Card content-->
+        <h4 class="card-title">
+          <strong>@{{user.username}}</strong>
+        </h4>
+        <h5>{{user.name}}</h5>
+
+        <mdb-card-text>
+
+        </mdb-card-text>
+
+        <!--Facebook-->
+        <a class="px-2 icons-sm fb-ic">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <!--Twitter-->
+        <a class="px-2 icons-sm fb-ic">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <!--Google +-->
+        <a class="px-2 icons-sm fb-ic">
+          <i class="fab fa-dribbble"></i>
+        </a>
+
+      </mdb-card-body>
+      <!--/.Card content-->
+
+    </mdb-card>
+    <!--/.Card-->
+  </div>
+  <div class="col-md-10">
+  <mdb-card>
+
+    <mdb-card-header class="default-color white-text text-center py-4">
+      <h5>
+        <strong>Profile</strong>
+      </h5>
+    </mdb-card-header>
+  
+  
+    <!--Card content-->
+    <mdb-card-body class="px-lg-5 pt-0">
+  
+      <!-- Form -->
+      <form  (submit)="profileUpdate()" class="text-center" style="color: #757575;">
+  
+        <div class="md-form input-group-prepend">
+            <span class="input-group-text md-addon">{{user.email}}</span>
+          </div>
+        <div class="md-form">
+          <input [(ngModel)]="user.name" name="name" type="text" id="Username" class="form-control" mdbInput>
+          <label for="Username">Name</label>
+        </div>
+        <div class="md-form">
+            <input [(ngModel)]="user.twitter" name="twitter" type="text" id="Usertwiiter" class="form-control" mdbInput>
+            <label for="Usertwiiter">twitter username</label>
+          </div>  
+        <!-- Sign in button -->
+        <button color="info" outline="true" rounded="true" block="true" class="btn info-color-dark my-4 waves-effect z-depth-0" mdbWavesEffect
+          type="submit">Save</button>
+      </form>
+      <!-- Form -->
+    </mdb-card-body>
+
+  </mdb-card>
+  </div>
+</div>

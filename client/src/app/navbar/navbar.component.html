@@ -17,7 +17,9 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link"> <mdb-icon fas icon="globe"></mdb-icon> 1 </a>
+        <a class="nav-link"> <mdb-icon fas icon="globe"></mdb-icon>
+           <span class="badge red">{{user.pokedCount}}</span>
+        </a>
       </li>
     </ul>
     <!-- Links -->
@@ -30,11 +32,18 @@
       </li>
     </ul>
         <!-- Search form -->
-        <form class="form-inline waves-light" mdbWavesEffect>
+        <!-- <form class="form-inline waves-light" mdbWavesEffect> -->
           <div class="md-form my-0 ml-auto">
-              <input class="form-control mr-sm-2" type="text" placeholder="Search">
+              <input name="searchInput" class="form-control mr-sm-2 searchInput" type="text" placeholder="Search peopel" (keyup)="searchTerm$.next($event.target.value)">
+              <ul class="searchResult list-group list-group-flush z-depth-1" *ngIf="results">
+                  <li *ngFor="let result of results | slice:0:9" class="list-group-item" >
+                    <a (click)="pokeUser(result.username)" target="_blank">
+                      {{ result.name }}
+                    </a>
+                  </li>
+                </ul>
           </div>
-      </form>
+      <!-- </form> -->
   </links>
     <!-- Links -->
 

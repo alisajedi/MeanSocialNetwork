@@ -1,6 +1,8 @@
 const db = require('../config/db.config.js');
 const config = require('../config/config.js');
 const User = db.user;
+const Op = db.Op;
+const sequelize = db.sequelize;
  
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
@@ -26,7 +28,7 @@ exports.signin = (req, res) => {
       expiresIn: 86400 // expires in 24 hours
     });
     
-    res.status(200).send({ auth: true, accessToken: token });
+    res.status(200).send({ auth: true, accessToken: token});
     
   }).catch(err => {
     res.status(500).send('Error -> ' + err);
@@ -36,7 +38,7 @@ exports.signin = (req, res) => {
 exports.userContent = (req, res) => {
     User.findOne({
       where: {id: req.userId},
-      attributes: ['name', 'username', 'email']
+      attributes: ['name', 'username', 'email','pokedCount']
     }).then(user => {
       res.status(200).json({
         "description": "User Content Page",
@@ -72,4 +74,58 @@ exports.updateProfile = (req, res) => {
 }).catch(function(e) {
     console.log("profile update failed !");
 })
+}
+
+
+exports.userList = (req, res) => {
+  let search = req.query.search;
+  if(search){
+  User.findAll({
+    where:{
+      [Op.or]: [
+        {
+          name: {
+            [Op.like]:`%${search}%`
+          }
+        },
+        {
+          username: {
+            [Op.like]:`%${search}%`
+          }
+        }
+      ]
+    },
+    attributes: ['name', 'username']
+  }).then(users => {
+    res.status(200).json({
+      "description": "User Content Page",
+      "users": users
+    });
+  }).catch(err => {
+    res.status(500).json({
+      "description": "cant load user list",
+      "error": err
+    });
+  })
+}
+}
+
+/* We must keep poke record in another table and save user poker,poked user,poking time and status in every record
+number of poke  with unseen status must be show to user
+in this part for Time limitation we save just poke number in one of user field :)
+*/
+exports.createPoke = (req, res) => {
+  User.update(
+    { pokedCount: sequelize.literal('pokedCount + 1')},
+    { where: { username : req.body.username }}
+  ).then(user => {
+    res.status(200).json({
+      "description": "User poked"
+    });
+  }).catch(err => {
+    res.status(500).json({
+      "description": "Can poked user",
+      "error": err
+    });
+  })
 }

@@ -23,6 +23,7 @@ export class LoginService {
 
   logout() {
     localStorage.removeItem('access_token');
+    localStorage.removeItem('userInfo');
   }
 
   public get loggedIn(): boolean {

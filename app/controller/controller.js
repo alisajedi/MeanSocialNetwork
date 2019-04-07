@@ -79,6 +79,7 @@ exports.updateProfile = (req, res) => {
 
 exports.userList = (req, res) => {
   let search = req.query.search;
+  if(search){
   User.findAll({
     where:{
       [Op.or]: [
@@ -106,6 +107,7 @@ exports.userList = (req, res) => {
       "error": err
     });
   })
+}
 }
 
 /* We must keep poke record in another table and save user poker,poked user,poking time and status in every record

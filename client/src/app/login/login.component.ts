@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
     this.login.login(this.username, this.password)
       .pipe(first())
       .subscribe(
-        result => this.router.navigate(['dashboard']),
+        result => {this.router.navigate(['dashboard']);location.reload();},
         err => this.error = 'Could not authenticate'
       );
   }
